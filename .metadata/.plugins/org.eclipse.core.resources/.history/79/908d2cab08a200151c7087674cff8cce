@@ -1,0 +1,20 @@
+package com.Twomey.TheAlmightyMessenger;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Server {
+
+	JFrame ServerFrame;
+	JPanel ;
+	
+	public static void main(String[] args) {
+		new Server();
+	}
+	
+	Server()
+	{
+		ServerFrame = new JFrame("The Almighty Messenger Server");
+		panel = new JPanel();
+	}
+
+}

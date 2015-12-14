@@ -1,0 +1,19 @@
+package com.Twomey.TheAlmightyMessenger;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Client {
+
+	JFrame frame;
+	JPanel panel;
+	
+	public static void main(String[] args) {
+		new Client();
+	}
+	
+	Client()
+	{
+		
+	}
+
+}

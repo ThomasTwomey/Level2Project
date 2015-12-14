@@ -1,0 +1,23 @@
+package com.Twomey.TheAlmightyMessenger;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Server {
+
+	JFrame ServerFrame;
+	JPanel LogPanel;
+	
+	public static void main(String[] args) {
+		new Server();
+	}
+	
+	Server()
+	{
+		ServerFrame = new JFrame("The Almighty Messenger Server");
+		LogPanel = new JPanel();
+		
+		ServerFrame.setVisible(true);
+		ServerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+}
