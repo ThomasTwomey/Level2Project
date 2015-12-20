@@ -69,7 +69,7 @@ public class Server implements ActionListener {
 			);
 		
 		ChatText = new JTextArea(7,30);
-		ChatText.insert("Chat Area:\n", 0);
+		ChatText.insert("\n\nChat Area:\n", 0);
 		ChatText.setEditable(false);
 		ChatText.setLineWrap(true);
 		

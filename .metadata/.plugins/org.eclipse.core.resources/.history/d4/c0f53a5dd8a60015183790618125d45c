@@ -139,8 +139,13 @@ public class Client implements ActionListener{
 		InputText.setEditable(true);
 		do{
 			try{
-				message = (String) Input.readObject();
-				sendMessage(message);
+				String previous = (String) Input.readObject();
+				if(Input.readObject() != previous)
+				{
+					previous = (String) Input.readObject();
+					message = (String) Input.readObject();
+					sendMessage(message);
+				}
 			}catch(ClassNotFoundException classNotFoundException) {
 				displayMessage("Could not read message");
 			}

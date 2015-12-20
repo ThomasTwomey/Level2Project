@@ -137,7 +137,9 @@ public class Client implements ActionListener{
 		String message = "You are now connected!";
 		displayMessage(message);
 		InputText.setEditable(true);
+		message = (String) Input.readObject();
 		do{
+			if(Input.readObject() == )
 			try{
 				message = (String) Input.readObject();
 				sendMessage(message);

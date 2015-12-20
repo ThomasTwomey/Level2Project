@@ -12,7 +12,6 @@ import java.net.Socket;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -28,8 +27,6 @@ public class Client implements ActionListener{
 	private Socket Connection;
 	private ObjectInputStream Input;
 	private ObjectOutputStream Output;
-	
- 	private JScrollBar ChatTextVerticleScrollBar;
 	
 	
 	public static void main(String[] args) {
@@ -63,8 +60,6 @@ public class Client implements ActionListener{
 		
 		JScrollPane ChatTextScrollPane = new JScrollPane(ChatText, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		ChatPanel.add(ChatTextScrollPane, BorderLayout.SOUTH);
-		
-		ChatTextVerticleScrollBar = ChatTextScrollPane.getVerticalScrollBar();
 		
 		Connect = new JButton("Connect");
 		Connect.addActionListener(this);
@@ -119,7 +114,6 @@ public class Client implements ActionListener{
 		}catch(IOException ioException){
 			ChatText.append("\nERROR COULD NOT SEND MESSAGE");
 		}
-		ChatTextVerticleScrollBar.setValue(ChatTextVerticleScrollBar.getMaximum());
 	}
 	
 	private void closeConnection() {

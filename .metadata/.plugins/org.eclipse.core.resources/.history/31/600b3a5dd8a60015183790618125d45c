@@ -11,8 +11,10 @@ import java.net.Socket;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class Server implements ActionListener {
 	private JFrame ServerFrame;
@@ -21,26 +23,21 @@ public class Server implements ActionListener {
 	private JPanel ChatPanel;
  	private JTextArea LogText;
  	private JTextArea ChatText;
- 	private JTextArea InputText;
+ 	private JTextField InputText;
  	private JButton StartButton;
  	private JButton StopButton;
+ 	private JScrollBar ChatTextVerticleScrollBar;
+ 	
  	private ObjectOutputStream Output;
  	private ObjectInputStream Input;
  	private ServerSocket Server;
  	private Socket Connection;
- 	private boolean isConnectionEstablished = false;
- 	private boolean ableToChat = false;
 	
 	public static void main(String[] args) {
 		new Server();
 	}
 	
 	public Server() {
-		createGui();
-	}
-	
-	private void createGui() {
-		
 		ServerFrame = new JFrame("The Almighty Messenger Server");
 		LogPanel = new JPanel();
 		ChatPanel = new JPanel();
@@ -59,18 +56,29 @@ public class Server implements ActionListener {
 		LogText.setEditable(false);
 		LogText.setLineWrap(true);
 		
-		InputText = new JTextArea(1,30);
+		InputText = new JTextField();
+		InputText.setSize(350, 25);
 		InputText.setEditable(false);
-		InputText.setLineWrap(true);
-		ChatPanel.add(InputText);
+		InputText.addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent event) {
+						sendMessage(event.getActionCommand());
+						InputText.setText("");
+					}
+				}
+			);
 		
 		ChatText = new JTextArea(7,30);
-		ChatText.insert("Chat Area:\n", 0);
+		ChatText.insert("\n\nChat Area:\n", 0);
 		ChatText.setEditable(false);
 		ChatText.setLineWrap(true);
 		
+		ChatText.add(InputText, BorderLayout.NORTH);
+		
 		JScrollPane ChatTextScrollPane = new JScrollPane(ChatText, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		ChatPanel.add(ChatTextScrollPane);
+		ChatPanel.add(ChatTextScrollPane, BorderLayout.SOUTH);
+		
+		ChatTextVerticleScrollBar = ChatTextScrollPane.getVerticalScrollBar();
 		
 		JScrollPane LogTextScrollPane = new JScrollPane(LogText,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		LogPanel.add(LogTextScrollPane);
@@ -90,11 +98,9 @@ public class Server implements ActionListener {
 				try{
 				Server = new ServerSocket(1738, 100);
 				displayLogMessage("Server socket bound");
-					while(!isConnectionEstablished){
+					while(true){
 						waitForConnection();
 						setupStreams();
-					}
-					while(ableToChat) {
 						whileChatting();
 					}
 				}		
@@ -119,12 +125,25 @@ public class Server implements ActionListener {
 		Output.flush();
 		Input = new ObjectInputStream(Connection.getInputStream());
 		displayLogMessage("Connection Established");
-		isConnectionEstablished = true;
-		ableToChat = true;
 	}
 	
-	private void whileChatting() {
-		
+	private void whileChatting() throws IOException {
+		String message = "You are now connected!";
+		displayMessage(message);
+		InputText.setEditable(true);
+		do{
+			try{
+				String previous = (String) Input.readObject();
+				//if(Input.readObject() != previous)
+				//{
+					previous = (String) Input.readObject();
+					message = (String) Input.readObject();
+					sendMessage(message);
+				//}
+			}catch(ClassNotFoundException classNotFoundException) {
+				displayMessage("Could not read message");
+			}
+		}while(!message.equals("SERVER - END"));
 	}
 	
 	private void closeConnection() {
@@ -133,10 +152,11 @@ public class Server implements ActionListener {
 			Output.close();
 			Input.close();
 			Connection.close();
+			InputText.setEditable(false);
 		}catch(IOException ioException){
 			ioException.printStackTrace();
 		}
-		displayLogMessage("Connections closed...")
+		displayLogMessage("Connections closed");
 	}
 
 	@Override
@@ -156,6 +176,23 @@ public class Server implements ActionListener {
 	
 	private void displayMessage(String message) {
 		ChatText.append("\n" + message);
+	}
+	
+	private void sendMessage(String message) {
+		try{
+			Output.writeObject("SERVER - " + message);
+			Output.flush();
+			if(message.contains("CLIENT -"))
+			{
+				ChatText.append("\n" + message);
+			}
+			else {
+				ChatText.append("\nSERVER - " + message);
+			}
+			ChatTextVerticleScrollBar.setValue(ChatTextVerticleScrollBar.getMaximum());
+		}catch(IOException ioException){
+			ChatText.append("\nERROR COULD NOT SEND MESSAGE");
+		}
 	}
 
 }
