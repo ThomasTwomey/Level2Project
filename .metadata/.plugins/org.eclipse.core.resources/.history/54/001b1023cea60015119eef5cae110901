@@ -1,0 +1,93 @@
+package com.Twomey.TheAlmightyMessenger;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class Client implements ActionListener{
+
+	JFrame ClientFrame;
+	JPanel ControlPanel;
+	JPanel ChatPanel;
+	JTextField InputText;
+	JTextArea ChatText;
+	JButton Connect;
+	ObjectInputStream Input;
+	ObjectOutputStream Output;
+	
+	public static void main(String[] args) {
+		new Client();
+	}
+	
+	public Client()
+	{
+		ClientFrame = new JFrame("The Almighty Messenger");
+		ControlPanel = new JPanel();
+		ChatPanel = new JPanel();
+		
+		InputText = new JTextField();
+		InputText.setSize(350, 25);
+		InputText.setEditable(false);
+		InputText.addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent event) {
+						//sendMessage(event.getActionCommand());
+						InputText.setText("");
+					}
+				}
+			);
+		
+		ChatText = new JTextArea(7,30);
+		ChatText.insert("Chat Area:\n", 0);
+		ChatText.setEditable(false);
+		ChatText.setLineWrap(true);
+		
+		JScrollPane ChatTextScrollPane = new JScrollPane(ChatText, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		ChatPanel.add(ChatTextScrollPane, BorderLayout.SOUTH);
+		
+		ChatPanel.add(InputText, BorderLayout.NORTH);
+		
+		Connect = new JButton("Connect");
+		Connect.addActionListener(this);
+		
+		ControlPanel.add(Connect);
+		
+		ClientFrame.setLayout(new BorderLayout());
+		ClientFrame.add(ControlPanel, BorderLayout.NORTH);
+		ClientFrame.add(ChatPanel, BorderLayout.SOUTH);
+		ClientFrame.setSize(400, 300);
+		ClientFrame.setVisible(true);
+		ClientFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	private void connectToServer() throws IOException {
+		Socket socket = new Socket("localhost", 1738);
+		Output = new ObjectOutputStream(socket.getOutputStream());
+		Input = new ObjectInputStream(socket.getInputStream());
+		System.out.println("Connected");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == Connect)
+		{
+			try {
+				connectToServer();
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+			}
+		}
+		
+	}
+
+}

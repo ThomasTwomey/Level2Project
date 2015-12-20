@@ -1,0 +1,43 @@
+package com.Twomey.TheAlmightyMessenger;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Client implements ActionListener{
+
+	JFrame ClientFrame;
+	JPanel ClientPanel;
+	JButton Connect;
+	
+	public static void main(String[] args) {
+		new Client();
+	}
+	
+	public Client()
+	{
+		ClientFrame = new JFrame("The Almighty Messenger");
+		ClientPanel = new JPanel();
+		Connect = new JButton("Connect");
+		Connect.addActionListener(this);
+		
+		ClientPanel.add(Connect);
+		
+		ClientFrame.add(ClientPanel);
+		ClientFrame.setSize(400, 300);
+		ClientFrame.setVisible(true);
+		ClientFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == Connect)
+		{
+			System.out.print("Test");
+		}
+		
+	}
+
+}

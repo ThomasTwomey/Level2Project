@@ -1,0 +1,59 @@
+package com.Twomey.TheAlmightyMessenger;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Client implements ActionListener{
+
+	JFrame ClientFrame;
+	JPanel ClientPanel;
+	JButton Connect;
+	ObjectInputStream Input;
+	ObjectOutputStream Output;
+	
+	public static void main(String[] args) {
+		new Client();
+	}
+	
+	public Client()
+	{
+		ClientFrame = new JFrame("The Almighty Messenger");
+		ClientPanel = new JPanel();
+		Connect = new JButton("Connect");
+		Connect.addActionListener(this);
+		
+		ClientPanel.add(Connect);
+		ClientFrame.add(ClientPanel);
+		ClientFrame.setSize(400, 300);
+		ClientFrame.setVisible(true);
+		ClientFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	private void connectToServer() throws IOException {
+		Socket socket = new Socket("localhost", 1738);
+		Output = new ObjectOutputStream(socket.getOutputStream());
+		Input = new ObjectInputStream(socket.getInputStream());
+		System.out.println("Connected");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == Connect)
+		{
+			try {
+				connectToServer();
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+			}
+		}
+		
+	}
+
+}
