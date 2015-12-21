@@ -1,0 +1,64 @@
+package com.Twomey.TheAlmightyMessenger;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+public class Server implements ActionListener{
+	JFrame frame;
+	JPanel controlPanel;
+	JPanel chatPanel;
+	JButton start;
+	JButton stop;
+	JTextArea chatText;
+	
+	
+	
+	public static void main(String[] args) {
+		new Server();
+	}
+
+	Server() {
+		frame = new JFrame("Server");
+		controlPanel = new JPanel();
+		chatPanel = new JPanel();
+		start = new JButton("Start");
+		stop = new JButton("Stop");
+		
+		chatText = new JTextArea(10,24);
+		chatText.setEditable(false);
+		chatText.setLineWrap(true);
+		
+		controlPanel.add(start);
+		controlPanel.add(stop);
+		
+		JScrollPane chatTextScrollPane = new JScrollPane(chatText, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		chatPanel.add(chatTextScrollPane);
+		
+		frame.setLayout(new BorderLayout());
+		frame.add(controlPanel, BorderLayout.NORTH);
+		frame.add(chatPanel, BorderLayout.SOUTH);
+		
+		frame.setSize(300, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == start) {
+			
+		}
+		else if(e.getSource() == stop) {
+			
+		}
+	}
+	
+}

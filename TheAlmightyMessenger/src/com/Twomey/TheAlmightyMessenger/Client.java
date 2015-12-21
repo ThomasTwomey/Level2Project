@@ -1,8 +1,8 @@
 package com.Twomey.TheAlmightyMessenger;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -12,148 +12,107 @@ import java.net.Socket;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Client implements ActionListener{
-
-	private JFrame ClientFrame;
-	private JPanel ControlPanel;
-	private JPanel ChatPanel;
-	private JTextField InputText;
-	private JTextArea ChatText;
-	private JButton Connect;
-	private Socket Connection;
-	private ObjectInputStream Input;
-	private ObjectOutputStream Output;
+	JFrame frame;
+	JPanel controlPanel;
+	JPanel chatPanel;
+	JButton connect;
+	JTextArea chatText;
+	JTextArea inputTextArea;
+	JTextField inputText;
 	
- 	private JScrollBar ChatTextVerticleScrollBar;
-	
+ 	private ObjectOutputStream output;
+ 	private ObjectInputStream input;
+ 	private ServerSocket server;
+ 	private Socket connection;
 	
 	public static void main(String[] args) {
 		new Client();
 	}
-	
-	public Client()
-	{
-		ClientFrame = new JFrame("The Almighty Messenger");
-		ControlPanel = new JPanel();
-		ChatPanel = new JPanel();
+
+	Client() {
+		frame = new JFrame("Client");
+		controlPanel = new JPanel();
+		chatPanel = new JPanel();
+		connect = new JButton("Connect");
 		
-		InputText = new JTextField();
-		InputText.setSize(350, 25);
-		InputText.setEditable(false);
-		InputText.addActionListener(
+		connect.addActionListener(this);
+		
+		chatText = new JTextArea(10,20);
+		chatText.setEditable(false);
+		chatText.setLineWrap(true);
+		
+		controlPanel.add(connect);
+		
+		inputText = new JTextField();
+		inputText.setSize(350, 25);
+		inputText.setEditable(true);
+		inputText.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent event) {
-						sendMessage(event.getActionCommand());
-						InputText.setText("");
+						//sendMessage(event.getActionCommand());
+						inputText.setText("");
 					}
 				}
 			);
 		
-		ChatText = new JTextArea(7,30);
-		ChatText.insert("\n\nChat Area:\n", 0);
-		ChatText.setEditable(false);
-		ChatText.setLineWrap(true);
+		inputTextArea = new JTextArea(2,22);
+		inputTextArea.setEditable(false);
+		inputTextArea.setLineWrap(true);
+		inputTextArea.add(inputText,BorderLayout.CENTER);
 		
-		ChatText.add(InputText, BorderLayout.SOUTH);
+		chatPanel.add(inputTextArea, BorderLayout.NORTH);
 		
-		JScrollPane ChatTextScrollPane = new JScrollPane(ChatText, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		ChatPanel.add(ChatTextScrollPane, BorderLayout.SOUTH);
+		JScrollPane chatTextScrollPane = new JScrollPane(chatText, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		ChatTextVerticleScrollBar = ChatTextScrollPane.getVerticalScrollBar();
+		chatPanel.add(chatTextScrollPane, BorderLayout.SOUTH);
 		
-		Connect = new JButton("Connect");
-		Connect.addActionListener(this);
+		frame.setLayout(new BorderLayout());
+		frame.add(controlPanel, BorderLayout.NORTH);
+		frame.add(chatPanel, BorderLayout.SOUTH);
 		
-		ControlPanel.add(Connect);
-		
-		ClientFrame.setLayout(new BorderLayout());
-		ClientFrame.add(ControlPanel, BorderLayout.NORTH);
-		ClientFrame.add(ChatPanel, BorderLayout.SOUTH);
-		ClientFrame.setSize(400, 300);
-		ClientFrame.setVisible(true);
-		ClientFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(300, 250);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 	}
 	
-	private void RunConnection() {
-		new Thread(){
-			public void run(){
-				try{
-					connectToServer();
-					whileChatting();
-				}		
-				catch(IOException ioException){
-					ioException.printStackTrace();
-				}finally{
-					closeConnection();
+	public void startClient() {
+		new Thread() {
+			public void run() {
+				try {
+				while(!isConnected) {
+					setupStreams();
+					showMessage("Connection Established");
 				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		}.start();
-	}
-	
-	private void connectToServer() {
-		try{
-			Connection = new Socket("localhost", 1738);
-			Output = new ObjectOutputStream(Connection.getOutputStream());
-			Output.flush();
-			Input = new ObjectInputStream(Connection.getInputStream());
-			System.out.println("Connected");
-		}catch(IOException ioException){
-			ioException.printStackTrace();
 		}
+	}.start();
 	}
 	
-	private void displayMessage(String message) {
-		ChatText.append("\n" + message);
+	boolean isConnected = false;
+	
+	private void setupStreams() throws IOException {
+		output = new ObjectOutputStream(connection.getOutputStream());
+		output.flush();
+		input = new ObjectInputStream(connection.getInputStream());
+		isConnected = true;
 	}
 	
-	private void sendMessage(String message) {
-		try{
-			Output.writeObject("CLIENT - " + message);
-			Output.flush();
-			ChatText.append("\nCLIENT - " + message);
-		}catch(IOException ioException){
-			ChatText.append("\nERROR COULD NOT SEND MESSAGE");
-		}
-		ChatTextVerticleScrollBar.setValue(ChatTextVerticleScrollBar.getMaximum());
-	}
-	
-	private void closeConnection() {
-		try{
-			Output.close();
-			Input.close();
-			Connection.close();
-			InputText.setEditable(false);
-		}catch(IOException ioException){
-			ioException.printStackTrace();
-		}
-	}
-	
-	private void whileChatting() throws IOException {
-		String message = "You are now connected!";
-		displayMessage(message);
-		InputText.setEditable(true);
-		do{
-			try{
-				message = (String) Input.readObject();
-				sendMessage(message);
-			}catch(ClassNotFoundException classNotFoundException) {
-				displayMessage("Could not read message");
-			}
-		}while(!message.equals("SERVER - END"));
+	private void showMessage(String message) {
+		chatText.append("\n" + message);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == Connect)
-		{
-			RunConnection();
+		if(e.getSource() == connect) {
+			startClient();
 		}
-		
 	}
-
+	
 }

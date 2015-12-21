@@ -1,4 +1,5 @@
 package com.Twomey.TheAlmightyMessenger;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,183 +12,121 @@ import java.net.Socket;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Server implements ActionListener {
-	private JFrame ServerFrame;
-	private JPanel ControlPanel;
-	private JPanel LogPanel;
-	private JPanel ChatPanel;
- 	private JTextArea LogText;
- 	private JTextArea ChatText;
- 	private JTextField InputText;
- 	private JButton StartButton;
- 	private JButton StopButton;
- 	private JScrollBar ChatTextVerticleScrollBar;
- 	
- 	private ObjectOutputStream Output;
- 	private ObjectInputStream Input;
- 	private ServerSocket Server;
- 	private Socket Connection;
+public class Server implements ActionListener{
+	JFrame frame;
+	JPanel controlPanel;
+	JPanel chatPanel;
+	JButton start;
+	JButton stop;
+	JTextArea chatText;
+	JTextArea inputTextArea;
+	JTextField inputText;
+	
+ 	private ObjectOutputStream output;
+ 	private ObjectInputStream input;
+ 	private ServerSocket server;
+ 	private Socket connection;
 	
 	public static void main(String[] args) {
 		new Server();
 	}
-	
-	public Server() {
-		ServerFrame = new JFrame("The Almighty Messenger Server");
-		LogPanel = new JPanel();
-		ChatPanel = new JPanel();
-		ControlPanel = new JPanel();
+
+	Server() {
+		frame = new JFrame("Server");
+		controlPanel = new JPanel();
+		chatPanel = new JPanel();
+		start = new JButton("Start");
+		stop = new JButton("Stop");
 		
-		StartButton = new JButton("Start");
-		StopButton = new JButton("Stop");
-		StartButton.addActionListener(this);
-		StopButton.addActionListener(this);
+		start.addActionListener(this);
+		stop.addActionListener(this);
 		
-		ControlPanel.add(StartButton);
-		ControlPanel.add(StopButton);
+		controlPanel.add(start);
+		controlPanel.add(stop);
 		
-		LogText = new JTextArea(6,30);
-		LogText.insert("Server Log Area:\nApplication Launched", 0);
-		LogText.setEditable(false);
-		LogText.setLineWrap(true);
-		
-		InputText = new JTextField();
-		InputText.setSize(350, 25);
-		InputText.setEditable(false);
-		InputText.addActionListener(
+		inputText = new JTextField();
+		inputText.setSize(350, 25);
+		inputText.setEditable(true);
+		inputText.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent event) {
-						sendMessage(event.getActionCommand());
-						InputText.setText("");
+						//sendMessage(event.getActionCommand());
+						inputText.setText("");
 					}
 				}
 			);
 		
-		ChatText = new JTextArea(7,30);
-		ChatText.insert("\n\nChat Area:\n", 0);
-		ChatText.setEditable(false);
-		ChatText.setLineWrap(true);
+		inputTextArea = new JTextArea(2,22);
+		inputTextArea.setEditable(false);
+		inputTextArea.setLineWrap(true);
+		inputTextArea.add(inputText,BorderLayout.CENTER);
 		
-		ChatText.add(InputText, BorderLayout.NORTH);
+		chatPanel.add(inputTextArea, BorderLayout.NORTH);
 		
-		JScrollPane ChatTextScrollPane = new JScrollPane(ChatText, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		ChatPanel.add(ChatTextScrollPane, BorderLayout.SOUTH);
+		chatText = new JTextArea(10,22);
+		chatText.setEditable(false);
+		chatText.setLineWrap(true);
 		
-		ChatTextVerticleScrollBar = ChatTextScrollPane.getVerticalScrollBar();
+		JScrollPane chatTextScrollPane = new JScrollPane(chatText, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		JScrollPane LogTextScrollPane = new JScrollPane(LogText,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		LogPanel.add(LogTextScrollPane);
+		chatPanel.add(chatTextScrollPane, BorderLayout.SOUTH);
 		
-		ServerFrame.setLayout(new BorderLayout());
-		ServerFrame.add(ControlPanel, BorderLayout.NORTH);
-		ServerFrame.add(ChatPanel, BorderLayout.CENTER);
-		ServerFrame.add(LogPanel, BorderLayout.SOUTH);
-		ServerFrame.setSize(400, 350);
-		ServerFrame.setVisible(true);
-		ServerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout());
+		frame.add(controlPanel, BorderLayout.NORTH);
+		frame.add(chatPanel, BorderLayout.SOUTH);
+		
+		frame.setSize(300, 250);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		
 	}
 	
-	private void startServer() {
-		new Thread(){
-			public void run(){
-				try{
-				Server = new ServerSocket(1738, 100);
-				displayLogMessage("Server socket bound");
-					while(true){
-						waitForConnection();
-						setupStreams();
-						whileChatting();
-					}
-				}		
-				catch(IOException ioException){
-					ioException.printStackTrace();
-				}finally{
-					closeConnection();
+	boolean isConnected = false;
+	
+	public void startServer() {
+		new Thread() {
+			public void run() {
+				try {
+				server = new ServerSocket(1738, 100);
+				while(!isConnected) {
+					waitForConnection();
+					setupStreams();
+					showMessage("Connection Established");
 				}
-		displayLogMessage("Connection Established");
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		}.start();
-	}
+		}
+	}.start();
+}
 	
 	private void waitForConnection() throws IOException{
-		displayLogMessage("Waiting for connection");
-		Connection = Server.accept();
-		displayLogMessage("Now Connected to " + Connection.getInetAddress().getHostName());
+		connection = server.accept();
 	}
 	
 	private void setupStreams() throws IOException {
-		Output = new ObjectOutputStream(Connection.getOutputStream());
-		Output.flush();
-		Input = new ObjectInputStream(Connection.getInputStream());
-		displayLogMessage("Connection Established");
+		output = new ObjectOutputStream(connection.getOutputStream());
+		output.flush();
+		input = new ObjectInputStream(connection.getInputStream());
+		isConnected = true;
 	}
 	
-	private void whileChatting() throws IOException {
-		String message = "You are now connected!";
-		displayMessage(message);
-		InputText.setEditable(true);
-		do{
-			try{
-				message = (String) Input.readObject();
-				sendMessage(message);
-			}catch(ClassNotFoundException classNotFoundException) {
-				displayMessage("Could not read message");
-			}
-		}while(!message.equals("SERVER - END"));
-	}
-	
-	private void closeConnection() {
-		displayLogMessage("Closing connections...");
-		try{
-			Output.close();
-			Input.close();
-			Connection.close();
-			InputText.setEditable(false);
-		}catch(IOException ioException){
-			ioException.printStackTrace();
-		}
-		displayLogMessage("Connections closed");
+	private void showMessage(String message) {
+		chatText.append("\n" + message);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == StartButton) {
+		if(e.getSource() == start) {
 			startServer();
 		}
-		else if(e.getSource() == StopButton) {
-			closeConnection();
-		}
-		
-	}
-	
-	private void displayLogMessage(String message) {
-		LogText.append("\n" + message);
-	}
-	
-	private void displayMessage(String message) {
-		ChatText.append("\n" + message);
-	}
-	
-	private void sendMessage(String message) {
-		try{
-			Output.writeObject("SERVER - " + message);
-			Output.flush();
-			if(message.contains("CLIENT -"))
-			{
-				ChatText.append("\n" + message);
-			}
-			else {
-				ChatText.append("\nSERVER - " + message);
-			}
-			ChatTextVerticleScrollBar.setValue(ChatTextVerticleScrollBar.getMaximum());
-		}catch(IOException ioException){
-			ChatText.append("\nERROR COULD NOT SEND MESSAGE");
+		else if(e.getSource() == stop) {
+			
 		}
 	}
-
+	
 }
