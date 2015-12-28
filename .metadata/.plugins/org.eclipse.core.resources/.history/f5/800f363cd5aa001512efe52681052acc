@@ -1,0 +1,28 @@
+package com.Twomey.Tutorial;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class Server extends JFrame{
+
+	private JTextField userText;
+	private JTextArea chatWindow;
+	private ObjectOutputStream output;
+	private ObjectInputStream input;
+	private ServerSocket server;
+	private Socket connection;
+	
+	
+	public Server(){
+		super("Messenger Tutorial Server");
+		userText = new JTextField();
+		userText.setEditable(false);
+		
+	}
+}

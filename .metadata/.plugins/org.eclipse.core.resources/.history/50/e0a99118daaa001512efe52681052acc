@@ -1,0 +1,22 @@
+package com.Twomey.Tutorial;
+
+import java.io.ObjectInputStream;
+
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class Client extends JFrame{
+	
+	private JTextField userText;
+	private JTextArea chatWindow;
+	private ObjectInputStream output;
+	private ObjectInputStream input;
+	private String message = "";
+	private String serverIP;
+	
+	public Client(String host){
+		
+	}
+	
+}

@@ -1,0 +1,10 @@
+package com.Twomey.Tutorial;
+
+import javax.swing.JFrame;
+
+public class Server extends JFrame{
+
+	private JTextField userText;
+	private JTextArea chatWindow;
+	
+}
