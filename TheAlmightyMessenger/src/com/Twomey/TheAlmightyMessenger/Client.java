@@ -44,6 +44,7 @@ public class Client extends JFrame{
 		add(new JScrollPane(chatWindow), BorderLayout.CENTER);
 		setSize(300, 150);
 		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public void startRunning(){

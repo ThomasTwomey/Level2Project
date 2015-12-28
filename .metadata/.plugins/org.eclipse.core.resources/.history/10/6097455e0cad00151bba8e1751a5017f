@@ -1,0 +1,11 @@
+package com.Twomey.TheAlmightyMessenger;
+
+import javax.swing.JFrame;
+
+public class ServerLaunch extends JFrame{
+
+	public ServerLaunch(){
+		
+	}
+	
+}

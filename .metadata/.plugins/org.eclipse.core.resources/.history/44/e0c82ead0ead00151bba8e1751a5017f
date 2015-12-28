@@ -1,0 +1,35 @@
+package com.Twomey.TheAlmightyMessenger;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class ServerLaunch extends JFrame{
+
+	private JButton start;
+	
+	public ServerLaunch(){
+		super("Server Launch Menu");
+		start = new JButton("Start");
+		start.addActionListener(
+			new ActionListener(){
+				public void actionPerformed(ActionEvent event){
+					ServerTest.startServer();
+				}
+			}
+		);
+		
+		JPanel panel = new JPanel();
+		panel.add(start);
+		
+		add(panel, BorderLayout.CENTER);
+		setSize(300, 150);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+}

@@ -10,7 +10,9 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -24,7 +26,6 @@ public class Server extends JFrame{
 	private ObjectInputStream input;
 	private ServerSocket server;
 	private Socket connection;
-	
 	
 	public Server(){
 		super("Server");
@@ -41,9 +42,11 @@ public class Server extends JFrame{
 		add(userText, BorderLayout.NORTH);
 		chatWindow = new JTextArea();
 		chatWindow.setEditable(false);
+		
 		add(new JScrollPane(chatWindow));
 		setSize(300, 150);
 		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public void startRunning(){
