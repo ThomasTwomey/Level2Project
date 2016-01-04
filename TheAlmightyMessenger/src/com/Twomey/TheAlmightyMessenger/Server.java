@@ -1,12 +1,14 @@
 package com.Twomey.TheAlmightyMessenger;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -21,7 +23,9 @@ import javax.swing.SwingUtilities;
 public class Server extends JFrame{
 
 	private JTextField userText;
+	private JPanel userTextPanel;
 	private JTextArea chatWindow;
+	private JButton emoji;
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	private ServerSocket server;
@@ -29,7 +33,8 @@ public class Server extends JFrame{
 	
 	public Server(){
 		super("Server");
-		userText = new JTextField();
+		userTextPanel = new JPanel();
+		userText = new JTextField(25);
 		userText.setEditable(false);
 		userText.addActionListener(
 			new ActionListener(){
@@ -39,12 +44,16 @@ public class Server extends JFrame{
 				}
 			}
 		);
-		add(userText, BorderLayout.NORTH);
+		userTextPanel.add(userText);
+		emoji = new JButton("Emoji");
+		userTextPanel.add(emoji);
+		add(userTextPanel, BorderLayout.NORTH);
+		
 		chatWindow = new JTextArea();
 		chatWindow.setEditable(false);
 		
 		add(new JScrollPane(chatWindow));
-		setSize(300, 150);
+		setSize(325, 150);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -69,7 +78,7 @@ public class Server extends JFrame{
 	}
 	
 	private void waitForConnection() throws IOException{
-		showMessage(" Waiting for someone to connect... \n");
+		showMessage(" Waiting for a connection at " + Inet4Address.getLocalHost().getHostAddress() + "\n");
 		connection = server.accept();
 		showMessage(" Now Connected to " + connection.getInetAddress().getHostName());
 	}
@@ -93,7 +102,7 @@ public class Server extends JFrame{
 				showMessage("\n Unknown user text recieved");
 			}
 			
-		}while(!message.equalsIgnoreCase("CLIENT - END"));
+		}while(!message.equalsIgnoreCase("CLIENT - /END"));
 	}
 	
 	private void cleanup() throws IOException{

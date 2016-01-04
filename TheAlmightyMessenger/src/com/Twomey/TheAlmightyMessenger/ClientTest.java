@@ -1,11 +1,12 @@
 package com.Twomey.TheAlmightyMessenger;
 
-import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class ClientTest{
 
 	public static void main(String[] args) {
-		Client client = new Client("127.0.0.1");
+		String ip = JOptionPane.showInputDialog("Enter the ip you want to connnect to");
+		Client client = new Client(ip);
 		client.startRunning();
 	}
 
