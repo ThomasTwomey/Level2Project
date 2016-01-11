@@ -141,12 +141,12 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_srROoKIHEeWSk9PGIt9_mQ" elementId="org.eclipse.ui.editorss" selectedElement="_srROoaIHEeWSk9PGIt9_mQ">
-      <children xsi:type="basic:PartStack" xmi:id="_srROoaIHEeWSk9PGIt9_mQ" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_j20TwKz6EeWC5Kfut1Hjjw">
+      <children xsi:type="basic:PartStack" xmi:id="_srROoaIHEeWSk9PGIt9_mQ" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_-D1EgKrcEeW5tOFkyLHy-w">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
         <tags>active</tags>
         <children xsi:type="basic:Part" xmi:id="_jt5BQKz6EeWC5Kfut1Hjjw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Server.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Server.java&quot; partName=&quot;Server.java&quot; title=&quot;Server.java&quot; tooltip=&quot;TheAlmightyMessenger/src/com/Twomey/TheAlmightyMessenger/Server.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/TheAlmightyMessenger/src/com/Twomey/TheAlmightyMessenger/Server.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;590&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Server.java&quot; partName=&quot;Server.java&quot; title=&quot;Server.java&quot; tooltip=&quot;TheAlmightyMessenger/src/com/Twomey/TheAlmightyMessenger/Server.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/TheAlmightyMessenger/src/com/Twomey/TheAlmightyMessenger/Server.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;8&quot; selectionOffset=&quot;1209&quot; selectionTopPixel=&quot;180&quot;/>&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
@@ -158,18 +158,18 @@
           <tags>removeOnHide</tags>
         </children>
         <children xsi:type="basic:Part" xmi:id="_j20TwKz6EeWC5Kfut1Hjjw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Client.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Client.java&quot; partName=&quot;Client.java&quot; title=&quot;Client.java&quot; tooltip=&quot;TheAlmightyMessenger/src/com/Twomey/TheAlmightyMessenger/Client.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/TheAlmightyMessenger/src/com/Twomey/TheAlmightyMessenger/Client.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;731&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Client.java&quot; partName=&quot;Client.java&quot; title=&quot;Client.java&quot; tooltip=&quot;TheAlmightyMessenger/src/com/Twomey/TheAlmightyMessenger/Client.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/TheAlmightyMessenger/src/com/Twomey/TheAlmightyMessenger/Client.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;1542&quot; selectionTopPixel=&quot;252&quot;/>&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_-D1EgKrcEeW5tOFkyLHy-w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="ClientTest.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ClientTest.java&quot; partName=&quot;ClientTest.java&quot; title=&quot;ClientTest.java&quot; tooltip=&quot;TheAlmightyMessenger/src/com/Twomey/TheAlmightyMessenger/ClientTest.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/TheAlmightyMessenger/src/com/Twomey/TheAlmightyMessenger/ClientTest.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;169&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
           <tags>active</tags>
           <tags>activeOnClose</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_-D1EgKrcEeW5tOFkyLHy-w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="ClientTest.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ClientTest.java&quot; partName=&quot;ClientTest.java&quot; title=&quot;ClientTest.java&quot; tooltip=&quot;TheAlmightyMessenger/src/com/Twomey/TheAlmightyMessenger/ClientTest.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/TheAlmightyMessenger/src/com/Twomey/TheAlmightyMessenger/ClientTest.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;40&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
-          <tags>removeOnHide</tags>
         </children>
       </children>
     </sharedElements>
@@ -286,7 +286,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_sgbQkKIHEeWSk9PGIt9_mQ" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_azR1MLgHEeWwm4P7te8nkw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_sJAPNaIHEeWSk9PGIt9_mQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_heBxwLgOEeW2zukXI9N4JA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_sJAPNaIHEeWSk9PGIt9_mQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_sgbQkaIHEeWSk9PGIt9_mQ" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -310,7 +310,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_sgb3oqIHEeWSk9PGIt9_mQ" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_azU4gLgHEeWwm4P7te8nkw" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_sI-Z-qIHEeWSk9PGIt9_mQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_heE1ELgOEeW2zukXI9N4JA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_sI-Z-qIHEeWSk9PGIt9_mQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_sgb3o6IHEeWSk9PGIt9_mQ" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -800,7 +800,7 @@
       <tags>platform:cocoa</tags>
       <parameters xmi:id="_huyWoq0CEeW1vJ8B9qi5mA" elementId="org.eclipse.ui.views.showView.viewId" name="org.eclipse.ui.views.showView.viewId" value="org.eclipse.debug.ui.VariableView"/>
     </bindings>
-    <bindings xmi:id="_ae45kLgHEeWwm4P7te8nkw" keySequence="COMMAND+CTRL+F" command="_sKI3gKIHEeWSk9PGIt9_mQ"/>
+    <bindings xmi:id="_hJrSYbgOEeW2zukXI9N4JA" keySequence="COMMAND+CTRL+F" command="_sKI3gKIHEeWSk9PGIt9_mQ"/>
   </bindingTables>
   <bindingTables xmi:id="_sJpvU6IHEeWSk9PGIt9_mQ" elementId="org.eclipse.mylyn.tasks.ui.views.tasks" bindingContext="_sJG80aIHEeWSk9PGIt9_mQ">
     <bindings xmi:id="_sJpvVKIHEeWSk9PGIt9_mQ" keySequence="ALT+SHIFT+ARROW_DOWN" command="_sJBdVqIHEeWSk9PGIt9_mQ"/>
@@ -904,7 +904,7 @@
     <bindings xmi:id="_humwcK0CEeW1vJ8B9qi5mA" keySequence="COMMAND+SHIFT+O" command="_sI6IhKIHEeWSk9PGIt9_mQ"/>
   </bindingTables>
   <bindingTables xmi:id="_sKJekaIHEeWSk9PGIt9_mQ" contributorURI="platform:/fragment/org.eclipse.e4.ui.workbench.renderers.swt.cocoa" bindingContext="_sIZyJqIHEeWSk9PGIt9_mQ">
-    <bindings xmi:id="_ae45kbgHEeWwm4P7te8nkw" keySequence="M1+W" command="_sKI3haIHEeWSk9PGIt9_mQ"/>
+    <bindings xmi:id="_hJr5cLgOEeW2zukXI9N4JA" keySequence="M1+W" command="_sKI3haIHEeWSk9PGIt9_mQ"/>
   </bindingTables>
   <bindingTables xmi:id="_srTD0aIHEeWSk9PGIt9_mQ" bindingContext="_srTD0KIHEeWSk9PGIt9_mQ"/>
   <bindingTables xmi:id="_srTD06IHEeWSk9PGIt9_mQ" bindingContext="_srTD0qIHEeWSk9PGIt9_mQ"/>
