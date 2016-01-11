@@ -5,13 +5,16 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -35,15 +38,16 @@ public class Server extends JFrame{
 	private ObjectInputStream input;
 	private ServerSocket server;
 	private Socket connection;
+	private String publicIp;
 	
 	public Server(){
 		super("Server");
 		setLookandFeel();
-		setSize(400, 250);
+		setSize(420, 250);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		userTextPanel = new JPanel();
-		userText = new JTextField(25);
+		userText = new JTextField(45);
 		userText.setEditable(false);
 		userText.addActionListener(
 			new ActionListener(){
@@ -58,6 +62,7 @@ public class Server extends JFrame{
 		
 		chatWindow = new JTextArea();
 		chatWindow.setEditable(false);
+		chatWindow.setLineWrap(true);
 		
 		add(new JScrollPane(chatWindow), BorderLayout.CENTER);
 		setVisible(true);
@@ -67,6 +72,11 @@ public class Server extends JFrame{
 	public void startRunning(){
 		try{
 			server = new ServerSocket(6789, 100);
+			try {
+				publicIp = getPublicIp();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			while(true){
 				try{
 					waitForConnection();
@@ -84,7 +94,7 @@ public class Server extends JFrame{
 	}
 	
 	private void waitForConnection() throws IOException{
-		showMessage(" Waiting for a connection at " + Inet4Address.getLocalHost().getHostAddress() + "\n");
+		showMessage("Waiting for a connection at\nlocal ip: " + Inet4Address.getLocalHost().getHostAddress() + "\npublic ip: " + publicIp + "\n");
 		connection = server.accept();
 		showMessage(" Now Connected to " + connection.getInetAddress().getHostName());
 	}
@@ -161,5 +171,24 @@ public class Server extends JFrame{
 			e.printStackTrace();
 		}
 	}
+	
+	public static String getPublicIp() throws Exception {
+        URL whatismyip = new URL("http://checkip.amazonaws.com");
+        BufferedReader in = null;
+        try {
+            in = new BufferedReader(new InputStreamReader(
+                    whatismyip.openStream()));
+            String ip = in.readLine();
+            return ip;
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 	
 }

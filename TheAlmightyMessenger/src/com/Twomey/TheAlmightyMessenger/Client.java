@@ -14,6 +14,7 @@ import java.net.Socket;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -28,6 +29,7 @@ public class Client extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField userText;
+	private JPanel userTextPanel;
 	private JTextArea chatWindow;
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
@@ -38,12 +40,13 @@ public class Client extends JFrame{
 	public Client(){
 		super("Client");
 		setLookandFeel();
-		String host = JOptionPane.showInputDialog("Enter the ip you want to connnect to");
-		setSize(400, 250);
+		String host = JOptionPane.showInputDialog("Enter the ip you want to connnect to (if left blank it will look for a server on the system)");
+		setSize(420, 250);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		serverIP = host;
-		userText = new JTextField();
+		userTextPanel = new JPanel();
+		userText = new JTextField(45);
 		userText.setEditable(false);
 		userText.addActionListener(
 			new ActionListener(){
@@ -53,9 +56,12 @@ public class Client extends JFrame{
 				}
 			}
 		);
-		add(userText, BorderLayout.SOUTH);
+		userTextPanel.add(userText);
+		add(userTextPanel, BorderLayout.SOUTH);
+		
 		chatWindow = new JTextArea();
 		chatWindow.setEditable(false);
+		chatWindow.setLineWrap(true);
 		add(new JScrollPane(chatWindow), BorderLayout.CENTER);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
