@@ -1,6 +1,8 @@
 package com.Twomey.TheAlmightyMessenger;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.EOFException;
@@ -11,6 +13,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -18,16 +21,24 @@ import javax.swing.SwingUtilities;
 
 public class Client extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField userText;
 	private JTextArea chatWindow;
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	private String message = "";
-	private String serverIP;
+	private String serverIP = "127.0.0.1";
 	private Socket connection;
 	
-	public Client(String host){
+	public Client(){
 		super("Client");
+		String host = JOptionPane.showInputDialog("Enter the ip you want to connnect to");
+		setSize(325, 150);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		serverIP = host;
 		userText = new JTextField();
 		userText.setEditable(false);

@@ -1,0 +1,12 @@
+package com.Twomey.TheAlmightyMessenger;
+
+import javax.swing.JOptionPane;
+
+public class ClientTest{
+
+	public static void main(String[] args) {
+		Client client = new Client(ip);
+		client.startRunning();
+	}
+
+}

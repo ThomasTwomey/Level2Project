@@ -1,7 +1,8 @@
 package com.Twomey.TheAlmightyMessenger;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.EOFException;
@@ -12,7 +13,6 @@ import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,10 +22,13 @@ import javax.swing.SwingUtilities;
 
 public class Server extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField userText;
 	private JPanel userTextPanel;
 	private JTextArea chatWindow;
-	private JButton emoji;
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	private ServerSocket server;
@@ -33,6 +36,9 @@ public class Server extends JFrame{
 	
 	public Server(){
 		super("Server");
+		setSize(325, 150);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		userTextPanel = new JPanel();
 		userText = new JTextField(25);
 		userText.setEditable(false);
@@ -45,15 +51,12 @@ public class Server extends JFrame{
 			}
 		);
 		userTextPanel.add(userText);
-		emoji = new JButton("Emoji");
-		userTextPanel.add(emoji);
 		add(userTextPanel, BorderLayout.NORTH);
 		
 		chatWindow = new JTextArea();
 		chatWindow.setEditable(false);
 		
 		add(new JScrollPane(chatWindow));
-		setSize(325, 150);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
