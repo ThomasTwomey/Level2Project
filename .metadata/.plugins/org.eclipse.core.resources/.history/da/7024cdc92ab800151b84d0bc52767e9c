@@ -1,0 +1,10 @@
+package com.Twomey.Experimental;
+
+public class TestClient{
+
+	public static void main(String[] args) {
+		TestRunClient client = new TestRunClient();
+		client.startRunning();
+	}
+
+}

@@ -1,0 +1,29 @@
+Beta Version 1.28
+Changes:
+1. Renamed classes ClientTest and ServerTest to RunClient and RunServer respectively
+
+Misc:
+1. Started an experimental branch
+
+Beta Version 1.025
+Changes:
+1. Added public ip address on server connection prompt
+
+----------------------------------------------------------------------------
+
+Beta Version 1.02
+Changes:
+1. Moved chat input to the bottom of the screen
+2. Set look and feel to that of the operating system
+3. Changed the size of both the client and server frames
+
+----------------------------------------------------------------------------
+
+Beta Version 1.01
+1. Fixed Client chatWindow editable text
+
+----------------------------------------------------------------------------
+
+Beta Version 1.0
+1. Cleaned up code and added runnable JAR files for the server and the
+client
