@@ -18,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Client extends JFrame{
 	
@@ -35,8 +37,9 @@ public class Client extends JFrame{
 	
 	public Client(){
 		super("Client");
+		setLookandFeel();
 		String host = JOptionPane.showInputDialog("Enter the ip you want to connnect to");
-		setSize(325, 150);
+		setSize(400, 250);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		serverIP = host;
@@ -50,11 +53,10 @@ public class Client extends JFrame{
 				}
 			}
 		);
-		add(userText, BorderLayout.NORTH);
+		add(userText, BorderLayout.SOUTH);
 		chatWindow = new JTextArea();
 		chatWindow.setEditable(false);
 		add(new JScrollPane(chatWindow), BorderLayout.CENTER);
-		setSize(325, 150);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -139,6 +141,15 @@ public class Client extends JFrame{
 				}
 			}
 		);
+	}
+	
+	private void setLookandFeel(){
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

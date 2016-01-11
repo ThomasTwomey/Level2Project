@@ -11,4 +11,5 @@
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
 <fullyQualifiedTypeName name="java.awt.FlowLayout"/>
+<fullyQualifiedTypeName name="com.Twomey.TheAlmightyMessenger.Server"/>
 </qualifiedTypeNameHistroy>

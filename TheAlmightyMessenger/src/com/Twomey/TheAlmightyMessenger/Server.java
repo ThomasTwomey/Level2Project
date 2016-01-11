@@ -19,6 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Server extends JFrame{
 
@@ -36,7 +38,8 @@ public class Server extends JFrame{
 	
 	public Server(){
 		super("Server");
-		setSize(325, 150);
+		setLookandFeel();
+		setSize(400, 250);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		userTextPanel = new JPanel();
@@ -51,12 +54,12 @@ public class Server extends JFrame{
 			}
 		);
 		userTextPanel.add(userText);
-		add(userTextPanel, BorderLayout.NORTH);
+		add(userTextPanel, BorderLayout.SOUTH);
 		
 		chatWindow = new JTextArea();
 		chatWindow.setEditable(false);
 		
-		add(new JScrollPane(chatWindow));
+		add(new JScrollPane(chatWindow), BorderLayout.CENTER);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -148,6 +151,15 @@ public class Server extends JFrame{
 				}
 			}
 		);
+	}
+	
+	private void setLookandFeel(){
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
