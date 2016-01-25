@@ -101,7 +101,7 @@ public class Client extends JFrame{
 				showMessage("\n Unknown object type");
 			}
 			
-		}while(!message.equalsIgnoreCase("SERVER - /END"));
+		}while(!message.equalsIgnoreCase("SERVER - END"));
 	}
 	
 	private void cleanup(){

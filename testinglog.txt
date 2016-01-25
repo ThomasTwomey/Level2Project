@@ -1,7 +1,14 @@
 Usability Testing Log Notes:
 
-1/24/2016:
+1/24/2016 - Jordan:
 1. Add a username functionality
-2. 
+2. Make end function “/end” instead of “end”
 
-———————————————————————————
+1/24/2016 - Nick:
+1. Add Color
+2. Some Console System
+
+1/24/2016 - Tyler:
+1. Add some sort of preferences (Text Color, Font, Etc.)
+
+----------------------------------------------------------------------------
