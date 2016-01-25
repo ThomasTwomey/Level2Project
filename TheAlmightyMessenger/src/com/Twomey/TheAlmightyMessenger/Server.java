@@ -44,7 +44,7 @@ public class Server extends JFrame{
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		userTextPanel = new JPanel();
-		userText = new JTextField(45);
+		userText = new JTextField(34);
 		userText.setEditable(false);
 		userText.addActionListener(
 			new ActionListener(){

@@ -1,9 +1,0 @@
-package com.Twomey.Experimental;
-
-public class RunServer {
-
-	public static void main(String[] args) {
-		TestServer server = new TestServer();
-		server.startRunning();
-	}
-}

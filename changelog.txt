@@ -1,3 +1,10 @@
+Beta Version 1.29
+Changes:
+1. Resized the userText box
+2. Updated the Jars
+
+----------------------------------------------------------------------------
+
 Beta Version 1.28
 Changes:
 1. Renamed classes ClientTest and ServerTest to RunClient and RunServer respectively
