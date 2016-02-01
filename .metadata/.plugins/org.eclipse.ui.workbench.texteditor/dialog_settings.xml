@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="CLIENT" key="selection"/>
+		<item value="showMessage" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="showmessage"/>
+			<item value="host"/>
 			<item value="client"/>
 			<item value="end"/>
 			<item value="borderlayout"/>
 			<item value="borderlayou8t"/>
 			<item value="chatwindow.set"/>
 			<item value="editable"/>
-			<item value="seteditable"/>
-			<item value="host"/>
 		</list>
 		<list key="replacehistory">
 			<item value="inputText"/>

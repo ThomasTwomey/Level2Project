@@ -13,6 +13,9 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -28,21 +31,43 @@ public class Client extends JFrame{
 	private JTextField userText;
 	private JPanel userTextPanel;
 	private JTextArea chatWindow;
+	private JMenuBar menuBar;
+	private JMenu fileMenu;
+	private JMenu optionsMenu;
+	private JMenuItem settingsAction;
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	private String message = "";
 	private String serverIP = "127.0.0.1";
 	private Socket connection;
+	public static String username = "Client";
 	
 	public Client(){
 		super("Client");
 		setLookandFeel();
-		String host = JOptionPane.showInputDialog("Enter the ip you want to connnect to (if left blank it will look for a server on the system)");
-		setSize(420, 250);
+		String host = JOptionPane.showInputDialog("Enter the ip you want to connnect to\n(if left blank it will look for a server on the system)");
+		setSize(420, 275);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		serverIP = host;
 		userTextPanel = new JPanel();
+		
+		menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		fileMenu = new JMenu("File");
+		menuBar.add(fileMenu);
+		optionsMenu = new JMenu("Options");
+		menuBar.add(optionsMenu);
+		settingsAction = new JMenuItem("Settings");
+		optionsMenu.add(settingsAction);
+		settingsAction.addActionListener(
+				new ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						new Settings(false);
+					}
+				}
+			);
+		
 		userText = new JTextField(34);
 		userText.setEditable(false);
 		userText.addActionListener(
@@ -62,6 +87,7 @@ public class Client extends JFrame{
 		add(new JScrollPane(chatWindow), BorderLayout.CENTER);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		username = JOptionPane.showInputDialog("Enter your username:");
 	}
 	
 	public void startRunning(){
@@ -118,9 +144,9 @@ public class Client extends JFrame{
 	
 	private void sendMessage(String message){
 		try{
-			output.writeObject("CLIENT - " + message);
+			output.writeObject(username + " - " + message);
 			output.flush();
-			showMessage("\nCLIENT - " + message);
+			showMessage("\n" + username + " - " + message);
 		}catch(IOException ioException){
 			chatWindow.append("\n Something went wrong sending message!");
 		}

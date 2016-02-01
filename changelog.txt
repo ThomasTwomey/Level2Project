@@ -1,3 +1,11 @@
+Beta Version 1.30
+Changes:
+1. Added custom usernames
+2. Added JMenuBar with settings
+3. Started work on settings menu
+
+----------------------------------------------------------------------------
+
 Beta Version 1.29.8
 Changes:
 1. Changed end function to “/end” rather than “end”
