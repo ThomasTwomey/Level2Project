@@ -12,4 +12,6 @@
 <fullyQualifiedTypeName name="java.awt.FlowLayout"/>
 <fullyQualifiedTypeName name="com.Twomey.TheAlmightyMessenger.Server"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="javax.swing.colorchooser.ColorSelectionModel"/>
 </qualifiedTypeNameHistroy>

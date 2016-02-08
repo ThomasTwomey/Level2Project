@@ -28,10 +28,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Client extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
-	private JTextField userText;
-	private JPanel userTextPanel;
-	private JTextArea chatWindow;
-	private JMenuBar menuBar;
+	public static JTextField userText;
+	public static JPanel userTextPanel;
+	public static JTextArea chatWindow;
+	public static JMenuBar menuBar;
 	private JMenu fileMenu;
 	private JMenu optionsMenu;
 	private JMenuItem settingsAction;
@@ -53,6 +53,7 @@ public class Client extends JFrame{
 		userTextPanel = new JPanel();
 		
 		menuBar = new JMenuBar();
+		menuBar.setOpaque(true);
 		setJMenuBar(menuBar);
 		fileMenu = new JMenu("File");
 		menuBar.add(fileMenu);

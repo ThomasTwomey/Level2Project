@@ -1,6 +1,7 @@
 package com.Twomey.TheAlmightyMessenger;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -32,10 +33,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Server extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
-	private JTextField userText;
-	private JPanel userTextPanel;
-	private JTextArea chatWindow;
-	private JMenuBar menuBar;
+	public static JTextField userText;
+	public static JPanel userTextPanel;
+	public static JTextArea chatWindow;
+	public static JMenuBar menuBar;
 	private JMenu fileMenu;
 	private JMenu optionsMenu;
 	private JMenuItem settingsAction;
@@ -55,6 +56,7 @@ public class Server extends JFrame{
 		userTextPanel = new JPanel();
 		
 		menuBar = new JMenuBar();
+		menuBar.setOpaque(true);
 		setJMenuBar(menuBar);
 		fileMenu = new JMenu("File");
 		menuBar.add(fileMenu);

@@ -1,3 +1,11 @@
+Beta Version 1.31
+Changes:
+1. Working Settings Menu
+2. Added Theme Selection
+3. Updated Jars
+
+----------------------------------------------------------------------------
+
 Beta Version 1.30
 Changes:
 1. Added custom usernames
