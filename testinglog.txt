@@ -11,4 +11,10 @@ Usability Testing Log Notes:
 1/24/2016 - Tyler:
 1. Add some sort of preferences (Text Color, Font, Etc.)
 
+2/14/2016 - Matthew:
+1. Add emoji’s
+
+2/14/2016 - Andrew
+1. Add easter eggs
+
 ----------------------------------------------------------------------------

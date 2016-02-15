@@ -40,6 +40,7 @@ public class Server extends JFrame{
 	private JMenu fileMenu;
 	private JMenu optionsMenu;
 	private JMenuItem settingsAction;
+	private JMenuItem closeOption;
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	private ServerSocket server;
@@ -60,6 +61,15 @@ public class Server extends JFrame{
 		setJMenuBar(menuBar);
 		fileMenu = new JMenu("File");
 		menuBar.add(fileMenu);
+		closeOption = new JMenuItem("Exit");
+		closeOption.addActionListener(
+				new ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						System.exit(0);
+					}
+				}
+			);
+		fileMenu.add(closeOption);
 		optionsMenu = new JMenu("Options");
 		menuBar.add(optionsMenu);
 		settingsAction = new JMenuItem("Settings");
@@ -161,6 +171,7 @@ public class Server extends JFrame{
 	
 	private void sendMessage(String message){
 		try{
+			message = CheckEmojis(message);
 			output.writeObject(username + " - " + message);
 			output.flush();
 			showMessage("\n" + username + " - " + message);
@@ -216,5 +227,16 @@ public class Server extends JFrame{
             }
         }
     }
+	
+	public String CheckEmojis(String message){
+		if(message.equalsIgnoreCase("/lenny")){
+			message = "( ͡° ͜ʖ ͡°)";
+		}
+		if(message.equalsIgnoreCase("/easteregg")){
+			message = "Congrats! You found the easter egg!";
+			
+		}
+		return message;
+	}
 	
 }

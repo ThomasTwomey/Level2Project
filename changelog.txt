@@ -1,3 +1,11 @@
+Beta Version 1.32
+Changes:
+1. Added exit to the file JMenu
+2. Added “/lenny” command
+3. Added Various Easter Eggs
+
+----------------------------------------------------------------------------
+
 Beta Version 1.31
 Changes:
 1. Working Settings Menu

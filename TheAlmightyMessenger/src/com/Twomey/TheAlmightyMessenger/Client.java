@@ -35,6 +35,7 @@ public class Client extends JFrame{
 	private JMenu fileMenu;
 	private JMenu optionsMenu;
 	private JMenuItem settingsAction;
+	private JMenuItem closeOption;
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	private String message = "";
@@ -59,6 +60,15 @@ public class Client extends JFrame{
 		menuBar.add(fileMenu);
 		optionsMenu = new JMenu("Options");
 		menuBar.add(optionsMenu);
+		closeOption = new JMenuItem("Exit");
+		closeOption.addActionListener(
+				new ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						System.exit(0);
+					}
+				}
+			);
+		fileMenu.add(closeOption);
 		settingsAction = new JMenuItem("Settings");
 		optionsMenu.add(settingsAction);
 		settingsAction.addActionListener(
@@ -145,6 +155,7 @@ public class Client extends JFrame{
 	
 	private void sendMessage(String message){
 		try{
+			message = CheckEmojis(message);
 			output.writeObject(username + " - " + message);
 			output.flush();
 			showMessage("\n" + username + " - " + message);
@@ -180,6 +191,17 @@ public class Client extends JFrame{
 				| UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String CheckEmojis(String message){
+		if(message.equals("/lenny")){
+			message = "( ͡° ͜ʖ ͡°)";
+		}
+		if(message.equalsIgnoreCase("/easteregg")){
+			message = "Congrats! You found the easter egg!";
+			
+		}
+		return message;
 	}
 	
 }
