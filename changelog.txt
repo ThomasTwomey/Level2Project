@@ -1,3 +1,9 @@
+Version 1.0
+Changes:
+1. First official version
+
+----------------------------------------------------------------------------
+
 Beta Version 1.32
 Changes:
 1. Added exit to the file JMenu
